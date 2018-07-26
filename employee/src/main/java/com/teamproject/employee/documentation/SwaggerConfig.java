@@ -25,8 +25,4 @@ public class SwaggerConfig {
                 .produces(PRODUCES_AND_CONSUME)
                 .consumes(PRODUCES_AND_CONSUME);
     }
-	/*
-		http://localhost:8080/v2/api-docs
-		http://localhost:8080/swagger-ui.html
-	 */
 }
