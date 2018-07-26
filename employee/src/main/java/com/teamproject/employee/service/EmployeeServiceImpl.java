@@ -1,6 +1,7 @@
 package com.teamproject.employee.service;
 
 import com.teamproject.employee.entity.EmployeeEntity;
+import com.teamproject.employee.exception.EmployeeNotFoundException;
 import com.teamproject.employee.model.Employee;
 import com.teamproject.employee.repository.EmployeeRepo;
 import org.modelmapper.ModelMapper;
@@ -20,7 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee getEmployeeById(Long id) {
         return employeeRepo.findById(id).map(employeeEntity ->
-                convertToEmployee(employeeEntity)).orElse(null);
+                convertToEmployee(employeeEntity)).orElseThrow(() -> new EmployeeNotFoundException(id));
     }
 
     private Employee convertToEmployee(EmployeeEntity employeeEntity) {
