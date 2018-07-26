@@ -9,3 +9,5 @@
 
 [Implement Eureka](https://github.com/cbarbosa21/Training-Request/commit/ff9546ed56ba3a4762243e9913fb79d4337dfcfa)
 * [Eureka Console](http://localhost:8761)
+
+[Implement Exception Handler](https://github.com/cbarbosa21/Training-Request/commit/8b1d9b86bb602aa802a6ceedf894cdcd1f39e6db)
