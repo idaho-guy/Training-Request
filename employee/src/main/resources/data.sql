@@ -1,0 +1,1 @@
+INSERT INTO EMPLOYEE_ENTITY VALUES (1, 'cbarbosa@gmail.com', '1', 'Ceasar', 'http.ouch.com', 'Barbosa', 'Chicago', 'Scrub');
