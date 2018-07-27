@@ -1,5 +1,6 @@
 package com.teamproject.trainingrequest.controller;
 
+import com.teamproject.trainingrequest.model.ApproveTrainingRequest;
 import com.teamproject.trainingrequest.model.CreateTrainingRequest;
 import com.teamproject.trainingrequest.model.TrainingRequest;
 import com.teamproject.trainingrequest.service.RequestService;
@@ -8,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -58,6 +62,14 @@ public class TrainingRequestRestControllerTest {
     
     @Test
     public void approveTrainingRequest() {
+        ApproveTrainingRequest approveTrainingRequest = new ApproveTrainingRequest();
+        String approver = "x";
+        Long trainingRequestId = 123L;
+        approveTrainingRequest.setApprover(approver);
+        ResponseEntity responseEntity = trainingRequestController.approveTrainingRequest(trainingRequestId, approveTrainingRequest);
+        verify(service, times(1)).approveTrainingRequest(trainingRequestId, approver);
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
 
     }
 

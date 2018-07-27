@@ -14,9 +14,13 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -147,6 +151,20 @@ public class TrainingRequestServiceTest {
 
     }
 
+    @Test
+    public void approveTrainingRequest() {
+        Long trainingRequestId = 123L;
+        String approver = "Professor X";
+
+        TrainingRequestEntity entity = new TrainingRequestEntity();
+        when(repo.findById(trainingRequestId)).thenReturn(Optional.of(entity));
+        trainingRequestService.approveTrainingRequest(trainingRequestId, approver);
+        verify(repo, times(1)).save(entity);
+
+        assertEquals(approver, entity.getApprovedBy());
+        assertNotNull(entity.getApprovedDate());
+    }
+
     private Employee createEmployee(Long employeeId, String firstName, String lastName) {
         Employee employee = new Employee();
         employee.setId(employeeId);
@@ -163,4 +181,5 @@ public class TrainingRequestServiceTest {
         createTrainingRequest.setLocation(location);
         return createTrainingRequest;
     }
+
 }

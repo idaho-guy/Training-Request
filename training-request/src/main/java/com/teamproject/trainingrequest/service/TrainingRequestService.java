@@ -1,6 +1,7 @@
 package com.teamproject.trainingrequest.service;
 
 import com.teamproject.trainingrequest.entity.TrainingRequestEntity;
+import com.teamproject.trainingrequest.exception.TrainingRequestNotFoundException;
 import com.teamproject.trainingrequest.model.CreateTrainingRequest;
 import com.teamproject.trainingrequest.model.Employee;
 import com.teamproject.trainingrequest.model.TrainingRequest;
@@ -9,7 +10,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -57,6 +60,14 @@ public class TrainingRequestService implements RequestService {
     public List<TrainingRequest> getTrainingRequestByCost(BigDecimal amount) {
         return repo.getTrainingRequestEntitiesByCostAfter(amount).stream().map(t ->
                 convertToTrainingRequest(t)).collect(Collectors.toList());
+    }
+
+    @Override
+    public void approveTrainingRequest(Long trainingRequestId, String approver) {
+        TrainingRequestEntity e = repo.findById(trainingRequestId).orElseThrow(() -> new TrainingRequestNotFoundException(trainingRequestId));
+        e.setApprovedBy(approver);
+        e.setApprovedDate(new Date());
+        repo.save(e);
     }
 
     private TrainingRequest convertToTrainingRequest(TrainingRequestEntity entity) {

@@ -1,5 +1,6 @@
 package com.teamproject.trainingrequest.controller;
 
+import com.teamproject.trainingrequest.model.ApproveTrainingRequest;
 import com.teamproject.trainingrequest.model.CreateTrainingRequest;
 import com.teamproject.trainingrequest.model.TrainingRequest;
 import com.teamproject.trainingrequest.service.RequestService;
@@ -42,5 +43,9 @@ public class TrainingRequestController {
 
     }
 
-
+    @PutMapping("/trainingrequests/{id}")
+    public ResponseEntity approveTrainingRequest(@PathVariable(name = "id") Long id, @RequestBody ApproveTrainingRequest approveTrainingRequest) {
+        requestService.approveTrainingRequest(id, approveTrainingRequest.getApprover());
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
 }

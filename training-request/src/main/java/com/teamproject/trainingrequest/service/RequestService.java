@@ -11,4 +11,6 @@ public interface RequestService {
     List<TrainingRequest> getOpenTrainingRequests();
 
     List<TrainingRequest> getTrainingRequestByCost(BigDecimal amount);
+
+    void approveTrainingRequest(Long trainingRequestId, String approver);
 }
