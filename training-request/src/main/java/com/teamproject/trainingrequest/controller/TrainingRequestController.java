@@ -6,9 +6,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
 import java.util.Collections;
 
 @RestController
@@ -20,7 +21,8 @@ public class TrainingRequestController {
         this.requestService = requestService;
     }
 
-    public ResponseEntity createTrainingRequest(TrainingRequest trainingRequest) {
+    @PostMapping("/trainingrequests")
+    public ResponseEntity createTrainingRequest(@RequestBody TrainingRequest trainingRequest) {
         Long trainingRequestId = requestService.createTrainingRequest(trainingRequest);
         MultiValueMap<String, String> headers = new HttpHeaders();
         headers.put(HttpHeaders.LOCATION, Collections.singletonList("/trainingrequests/" + trainingRequestId));
