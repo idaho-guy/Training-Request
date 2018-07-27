@@ -15,3 +15,5 @@
 [Implement Post Using Feign Client](https://github.com/cbarbosa21/Training-Request/commit/94ee8457cd82b4ffd3e57cf70e07c15b72ea70b1)
 
 [Get Request with Query params](https://github.com/cbarbosa21/Training-Request/commit/4932d2dc8975c8ad325a03c7df6223735969286e)
+
+[Implement PUT](https://github.com/cbarbosa21/Training-Request/commit/083aac03772a928a6c753434470240832e1bae52)
