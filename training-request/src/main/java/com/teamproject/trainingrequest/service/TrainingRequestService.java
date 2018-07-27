@@ -1,14 +1,13 @@
 package com.teamproject.trainingrequest.service;
 
 import com.teamproject.trainingrequest.entity.TrainingRequestEntity;
-import com.teamproject.trainingrequest.model.Employee;
 import com.teamproject.trainingrequest.model.CreateTrainingRequest;
+import com.teamproject.trainingrequest.model.Employee;
 import com.teamproject.trainingrequest.model.TrainingRequest;
 import com.teamproject.trainingrequest.repository.TrainingRequestRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,12 +27,22 @@ public class TrainingRequestService implements RequestService {
     @Override
     public Long createTrainingRequest(CreateTrainingRequest createTrainingRequest) {
         Employee employee = employeeService.getEmployeeById(createTrainingRequest.getEmployeeId());
-        TrainingRequestEntity entity = modelMapper.map(createTrainingRequest, TrainingRequestEntity.class);
+        TrainingRequestEntity entity = createEntity(createTrainingRequest);
         entity.setRequestedByFirstName(employee.getFirstName());
         entity.setRequestedByLastName(employee.getLastName());
         TrainingRequestEntity saved = repo.save(entity);
 
         return saved.getId();
+    }
+
+    private TrainingRequestEntity createEntity(CreateTrainingRequest createTrainingRequest) {
+        TrainingRequestEntity entity = new TrainingRequestEntity();
+        entity.setEmployeeId(createTrainingRequest.getEmployeeId());
+        entity.setLocation(createTrainingRequest.getLocation());
+        entity.setDescription(createTrainingRequest.getDescription());
+        entity.setCost(createTrainingRequest.getCost());
+
+        return entity;
     }
 
     @Override
