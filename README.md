@@ -13,3 +13,5 @@
 [Implement Exception Handler](https://github.com/cbarbosa21/Training-Request/commit/8b1d9b86bb602aa802a6ceedf894cdcd1f39e6db)
 
 [Implement Post Using Feign Client](https://github.com/cbarbosa21/Training-Request/commit/94ee8457cd82b4ffd3e57cf70e07c15b72ea70b1)
+
+[Get Request with Query params](https://github.com/cbarbosa21/Training-Request/commit/4932d2dc8975c8ad325a03c7df6223735969286e)
