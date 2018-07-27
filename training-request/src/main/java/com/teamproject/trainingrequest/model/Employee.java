@@ -8,7 +8,7 @@ public class Employee {
     private String email;
     private String employeeNumber;
     private String firstName;
-    private Integer id;
+    private Long id;
     private String imageUrl;
     private String lastName;
     private String office;
