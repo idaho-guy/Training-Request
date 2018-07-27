@@ -8,6 +8,7 @@ import com.teamproject.trainingrequest.repository.TrainingRequestRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,8 +48,15 @@ public class TrainingRequestService implements RequestService {
 
     @Override
     public List<TrainingRequest> getOpenTrainingRequests() {
-        return repo.getOpenTrainingRequests().stream().map(t -> convertToTrainingRequest(t)).collect(Collectors.toList());
+        return repo.getOpenTrainingRequests().stream().map(t ->
+                convertToTrainingRequest(t)).collect(Collectors.toList());
 
+    }
+
+    @Override
+    public List<TrainingRequest> getTrainingRequestByCost(BigDecimal amount) {
+        return repo.getTrainingRequestEntitiesByCostAfter(amount).stream().map(t ->
+                convertToTrainingRequest(t)).collect(Collectors.toList());
     }
 
     private TrainingRequest convertToTrainingRequest(TrainingRequestEntity entity) {

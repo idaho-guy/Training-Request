@@ -7,16 +7,17 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
 @RestController
 public class TrainingRequestController {
+
+    protected static final String TRAINING_REQUEST_OPEN = "open";
+    private static final String MINIMUM_TRAINING_AMOUNT = "0.00";
 
     private RequestService requestService;
 
@@ -33,8 +34,13 @@ public class TrainingRequestController {
     }
 
     @GetMapping("/trainingrequests")
-    public List<TrainingRequest> getOpenTrainingRequests() {
-        List<TrainingRequest> openTrainingRequests = requestService.getOpenTrainingRequests();
-        return openTrainingRequests;
+    public List<TrainingRequest> getTrainingRequests(@RequestParam(value = "cost", required = false) BigDecimal cost) {
+        if(cost != null){
+            return requestService.getTrainingRequestByCost(cost);
+        }
+        return requestService.getOpenTrainingRequests();
+
     }
+
+
 }

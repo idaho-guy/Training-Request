@@ -106,6 +106,47 @@ public class TrainingRequestServiceTest {
 
     }
 
+    @Test
+    public void getOpenTrainingRequestsAboveDollarAmount() {
+
+        String firstName = "Mark";
+        String lastName = "Sage";
+        BigDecimal cost = new BigDecimal(100.00);
+        String desc = "Marks Spring Help";
+        String location = "Jamaica";
+
+        TrainingRequestEntity newEntity = new TrainingRequestEntity();
+
+        newEntity.setRequestedByFirstName(firstName);
+        newEntity.setRequestedByLastName(lastName);
+        newEntity.setCost(cost);
+        newEntity.setDescription(desc);
+        newEntity.setLocation(location);
+        newEntity.setEmployeeId(1L);
+
+        TrainingRequest expectedTrainingRequest = new TrainingRequest();
+        expectedTrainingRequest.setRequestedByFirstName(firstName);
+        expectedTrainingRequest.setRequestedByLastName(lastName);
+        expectedTrainingRequest.setLocation(location);
+        expectedTrainingRequest.setDescription(desc);
+        expectedTrainingRequest.setCost(cost);
+
+        List<TrainingRequestEntity> trainingRequests = Arrays.asList(newEntity);
+        BigDecimal amount = cost.subtract(new BigDecimal(0.01));
+        when(repo.getTrainingRequestEntitiesByCostAfter(amount)).thenReturn(trainingRequests);
+
+        List<TrainingRequest> costTrainingRequests = trainingRequestService.getTrainingRequestByCost(amount);
+        assertArrayEquals(new TrainingRequest[]{expectedTrainingRequest}, costTrainingRequests.toArray());
+        TrainingRequest req = costTrainingRequests.get(0);
+        assertEquals(firstName, req.getRequestedByFirstName());
+        assertEquals(lastName, req.getRequestedByLastName());
+        assertEquals(location, req.getLocation());
+        assertEquals(desc, req.getDescription());
+        assertEquals(cost, req.getCost());
+        assertEquals(1L, req.getEmployeeId().longValue());
+
+    }
+
     private Employee createEmployee(Long employeeId, String firstName, String lastName) {
         Employee employee = new Employee();
         employee.setId(employeeId);

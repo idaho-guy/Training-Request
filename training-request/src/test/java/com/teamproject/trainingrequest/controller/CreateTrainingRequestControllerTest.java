@@ -10,12 +10,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.ResponseEntity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
-import static junit.framework.TestCase.assertSame;
+import static junit.framework.TestCase.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -42,8 +41,20 @@ public class CreateTrainingRequestControllerTest {
     public void getOpenTrainingRequests() {
         List expectedList = new ArrayList();
         when(service.getOpenTrainingRequests()).thenReturn(expectedList);
-        List<TrainingRequest> trainingRequests = trainingRequestController.getOpenTrainingRequests();
+        List<TrainingRequest> trainingRequests = trainingRequestController.getTrainingRequests(null);
         assertNotNull(trainingRequests);
         assertSame(expectedList, trainingRequests);
     }
+
+    @Test
+    public void getOpenTrainingRequestAboveCost() {
+        List expectedList = new ArrayList();
+        BigDecimal amount = new BigDecimal(5.00);
+        when(service.getTrainingRequestByCost(amount)).thenReturn(expectedList);
+        List<TrainingRequest> trainingRequests = trainingRequestController.getTrainingRequests(amount);
+        assertNotNull(trainingRequests);
+        assertSame(expectedList, trainingRequests);
+    }
+
+
 }
