@@ -17,3 +17,5 @@
 [Get Request with Query params](https://github.com/cbarbosa21/Training-Request/commit/4932d2dc8975c8ad325a03c7df6223735969286e)
 
 [Implement PUT](https://github.com/cbarbosa21/Training-Request/commit/083aac03772a928a6c753434470240832e1bae52)
+
+[Eureka Configuration](https://github.com/cbarbosa21/Training-Request/commit/ef0ccb05267fe6b18cdd0822aace05ac349034b0)
