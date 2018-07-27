@@ -18,7 +18,7 @@ import static junit.framework.TestCase.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CreateTrainingRequestControllerTest {
+public class TrainingRequestRestControllerTest {
 
     @InjectMocks
     TrainingRequestController trainingRequestController;
@@ -54,6 +54,11 @@ public class CreateTrainingRequestControllerTest {
         List<TrainingRequest> trainingRequests = trainingRequestController.getTrainingRequests(amount);
         assertNotNull(trainingRequests);
         assertSame(expectedList, trainingRequests);
+    }
+    
+    @Test
+    public void approveTrainingRequest() {
+
     }
 
 
