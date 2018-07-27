@@ -15,6 +15,12 @@ public class ExceptionController {
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<Object> handleAllOtherExceptions(Exception ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage());
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(TrainingRequestNotFoundException.class)
+    public final ResponseEntity<Object> handleTrainingRequestNoFound(TrainingRequestNotFoundException ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage());
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 
