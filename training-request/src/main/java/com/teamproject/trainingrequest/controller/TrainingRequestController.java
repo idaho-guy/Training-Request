@@ -1,6 +1,6 @@
 package com.teamproject.trainingrequest.controller;
 
-import com.teamproject.trainingrequest.model.TrainingRequest;
+import com.teamproject.trainingrequest.model.CreateTrainingRequest;
 import com.teamproject.trainingrequest.service.RequestService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,8 +22,8 @@ public class TrainingRequestController {
     }
 
     @PostMapping("/trainingrequests")
-    public ResponseEntity createTrainingRequest(@RequestBody TrainingRequest trainingRequest) {
-        Long trainingRequestId = requestService.createTrainingRequest(trainingRequest);
+    public ResponseEntity createTrainingRequest(@RequestBody CreateTrainingRequest createTrainingRequest) {
+        Long trainingRequestId = requestService.createTrainingRequest(createTrainingRequest);
         MultiValueMap<String, String> headers = new HttpHeaders();
         headers.put(HttpHeaders.LOCATION, Collections.singletonList("/trainingrequests/" + trainingRequestId));
         return new ResponseEntity(headers, HttpStatus.CREATED);

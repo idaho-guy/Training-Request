@@ -2,7 +2,7 @@ package com.teamproject.trainingrequest.service;
 
 import com.teamproject.trainingrequest.entity.TrainingRequestEntity;
 import com.teamproject.trainingrequest.model.Employee;
-import com.teamproject.trainingrequest.model.TrainingRequest;
+import com.teamproject.trainingrequest.model.CreateTrainingRequest;
 import com.teamproject.trainingrequest.repository.TrainingRequestRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -21,9 +21,9 @@ public class TrainingRequestService implements RequestService {
     }
 
     @Override
-    public Long createTrainingRequest(TrainingRequest trainingRequest) {
-        Employee employee = employeeService.getEmployeeById(trainingRequest.getEmployeeId());
-        TrainingRequestEntity entity = modelMapper.map(trainingRequest, TrainingRequestEntity.class);
+    public Long createTrainingRequest(CreateTrainingRequest createTrainingRequest) {
+        Employee employee = employeeService.getEmployeeById(createTrainingRequest.getEmployeeId());
+        TrainingRequestEntity entity = modelMapper.map(createTrainingRequest, TrainingRequestEntity.class);
         entity.setRequestedByFirstName(employee.getFirstName());
         entity.setRequestedByLastName(employee.getLastName());
         TrainingRequestEntity saved = repo.save(entity);

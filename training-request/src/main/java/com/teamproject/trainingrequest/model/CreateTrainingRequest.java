@@ -5,7 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class TrainingRequest {
+public class CreateTrainingRequest {
 
     private String location;
     private String description;

@@ -1,6 +1,6 @@
 package com.teamproject.trainingrequest.controller;
 
-import com.teamproject.trainingrequest.model.TrainingRequest;
+import com.teamproject.trainingrequest.model.CreateTrainingRequest;
 import com.teamproject.trainingrequest.service.RequestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,7 @@ import static junit.framework.TestCase.assertNotNull;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TrainingRequestControllerTest {
+public class CreateTrainingRequestControllerTest {
 
     @InjectMocks
     TrainingRequestController trainingRequestController;
@@ -24,12 +24,17 @@ public class TrainingRequestControllerTest {
 
     @Test
     public void createTrainingRequest() {
-        TrainingRequest trainingRequest = new TrainingRequest();
-        when(service.createTrainingRequest(trainingRequest)).thenReturn(new Long(1234));
-        ResponseEntity responseEntity = trainingRequestController.createTrainingRequest(trainingRequest);
+        CreateTrainingRequest createTrainingRequest = new CreateTrainingRequest();
+        when(service.createTrainingRequest(createTrainingRequest)).thenReturn(new Long(1234));
+        ResponseEntity responseEntity = trainingRequestController.createTrainingRequest(createTrainingRequest);
         assertNotNull(responseEntity);
 
         String location = responseEntity.getHeaders().get("location").get(0);
         assertEquals("/trainingrequests/1234", location);
+    }
+    
+    @Test
+    public void getOpenTrainingRequests() { 
+        
     }
 }
