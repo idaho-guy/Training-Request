@@ -11,3 +11,4 @@
 * [Eureka Console](http://localhost:8761)
 
 [Implement Exception Handler](https://github.com/cbarbosa21/Training-Request/commit/8b1d9b86bb602aa802a6ceedf894cdcd1f39e6db)
+[Implement Post Using Feign Client](https://github.com/cbarbosa21/Training-Request/commit/94ee8457cd82b4ffd3e57cf70e07c15b72ea70b1)
