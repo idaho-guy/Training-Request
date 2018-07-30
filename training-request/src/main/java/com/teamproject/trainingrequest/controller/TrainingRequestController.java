@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Supplier;
 
 @RestController
 public class TrainingRequestController {
@@ -35,12 +36,23 @@ public class TrainingRequestController {
     }
 
     @GetMapping("/trainingrequests")
-    public List<TrainingRequest> getTrainingRequests(@RequestParam(value = "cost", required = false) BigDecimal cost) {
-        if(cost != null){
-            return requestService.getTrainingRequestByCost(cost);
-        }
-        return requestService.getOpenTrainingRequests();
+    public ResponseEntity<List<TrainingRequest>> getTrainingRequests(@RequestParam(value = "cost", required = false) BigDecimal cost) {
 
+        if(cost != null){
+            return getTrainingRequests(() -> requestService.getTrainingRequestByCost(cost));
+        }else{
+            return getTrainingRequests(() -> requestService.getOpenTrainingRequests());
+        }
+
+
+    }
+
+    private ResponseEntity<List<TrainingRequest>> getTrainingRequests(Supplier<List<TrainingRequest>> supplier){
+        List<TrainingRequest> requests = supplier.get();
+        if(requests == null || requests.size() == 0){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(requests,HttpStatus.OK);
     }
 
     @PutMapping("/trainingrequests/{id}")
