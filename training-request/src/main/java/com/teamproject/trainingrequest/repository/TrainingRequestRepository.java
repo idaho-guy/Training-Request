@@ -11,7 +11,7 @@ public interface TrainingRequestRepository extends CrudRepository<TrainingReques
 
     List<TrainingRequestEntity> getTrainingRequestEntitiesByCostAfter(BigDecimal cost);
 
-    @Query("from TrainingRequestEntity where approvedBy is null ")
+    @Query("from TrainingRequest where approvedBy is null ")
     List<TrainingRequestEntity> getOpenTrainingRequests();
 
 

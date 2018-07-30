@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-@Entity
+@Entity(name = "TrainingRequest")
 public class TrainingRequestEntity {
 
     @Id
