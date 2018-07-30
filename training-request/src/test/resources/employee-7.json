@@ -1,0 +1,10 @@
+{
+  "id": 7,
+  "firstName": "Vince",
+  "lastName": "Norris",
+  "employeeNumber": "7",
+  "office": "Chicago",
+  "title": "Technical Analyst",
+  "email": "vnorris@gmail.com",
+  "imageUrl": "http://ouch.com"
+}

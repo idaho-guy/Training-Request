@@ -13,7 +13,7 @@ public class CreateTrainingRequest {
     @NotEmpty(message = "location is really required")
     private String location;
     @NotEmpty(message = "message is really required")
-    @Size(min = 12, message = "You should be more descriptive")
+    @Size(min = 9, message = "You should be more descriptive")
     private String description;
     @NotNull(message = "cost must not be null")
     private BigDecimal cost;

@@ -39,6 +39,7 @@ dependencies {
 	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
 	runtime('com.h2database:h2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile group: 'com.github.tomakehurst', name: 'wiremock', version: '2.18.0'
 }
 
 dependencyManagement {

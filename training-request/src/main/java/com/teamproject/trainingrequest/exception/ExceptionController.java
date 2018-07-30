@@ -31,7 +31,7 @@ public class ExceptionController {
     public final ResponseEntity<Object> handle(MethodArgumentNotValidException ex, WebRequest request) {
         String message = ex.getBindingResult().getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(joining(", "));
         ExceptionResponse exceptionResponse = new ExceptionResponse(message);
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
 }
