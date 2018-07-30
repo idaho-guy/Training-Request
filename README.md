@@ -25,3 +25,5 @@
 [Logging](https://github.com/cbarbosa21/Training-Request/commit/3d9c676f4049e4b72bfb96863afb5146a0c31a33)
 
 [Implement Zuul](https://github.com/cbarbosa21/Training-Request/commit/9cef7496617708d953849a32bb59dcbb686260a4)
+
+[Supplier](https://github.com/cbarbosa21/Training-Request/commit/8904681e3df84b94166c88db27c806984f90144f)
