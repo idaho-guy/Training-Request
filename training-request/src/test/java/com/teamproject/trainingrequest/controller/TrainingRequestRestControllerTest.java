@@ -44,20 +44,39 @@ public class TrainingRequestRestControllerTest {
     @Test
     public void getOpenTrainingRequests() {
         List expectedList = new ArrayList();
+        expectedList.add(new TrainingRequest());
         when(service.getOpenTrainingRequests()).thenReturn(expectedList);
-        List<TrainingRequest> trainingRequests = trainingRequestController.getTrainingRequests(null);
-        assertNotNull(trainingRequests);
-        assertSame(expectedList, trainingRequests);
+        ResponseEntity<List<TrainingRequest>> requestResponse = trainingRequestController.getTrainingRequests(null);
+        assertSame(expectedList, requestResponse.getBody());
+        assertSame(HttpStatus.OK, requestResponse.getStatusCode());
+    }
+
+    @Test
+    public void getOpenTrainingRequestsNoneFound() {
+        List expectedList = new ArrayList();
+        when(service.getOpenTrainingRequests()).thenReturn(expectedList);
+        ResponseEntity<List<TrainingRequest>> trainingRequests = trainingRequestController.getTrainingRequests(null);
+        assertSame(HttpStatus.NOT_FOUND, trainingRequests.getStatusCode());
     }
 
     @Test
     public void getOpenTrainingRequestAboveCost() {
         List expectedList = new ArrayList();
+        expectedList.add(new TrainingRequest());
         BigDecimal amount = new BigDecimal(5.00);
         when(service.getTrainingRequestByCost(amount)).thenReturn(expectedList);
-        List<TrainingRequest> trainingRequests = trainingRequestController.getTrainingRequests(amount);
-        assertNotNull(trainingRequests);
-        assertSame(expectedList, trainingRequests);
+        ResponseEntity<List<TrainingRequest>> requestResponse = trainingRequestController.getTrainingRequests(amount);
+
+        assertSame(HttpStatus.OK, requestResponse.getStatusCode());
+        assertSame(expectedList, requestResponse.getBody());
+    }
+
+    @Test
+    public void getOpenTrainingRequestAboveCostNoneFound() {
+        when(service.getTrainingRequestByCost(new BigDecimal(5.00))).thenReturn(new ArrayList());
+        ResponseEntity<List<TrainingRequest>> requestResponse = trainingRequestController.getTrainingRequests(new BigDecimal(5.00));
+
+        assertSame(HttpStatus.NOT_FOUND, requestResponse.getStatusCode());
     }
     
     @Test
