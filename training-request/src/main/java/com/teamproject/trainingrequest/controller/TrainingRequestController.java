@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
@@ -18,9 +19,6 @@ import java.util.function.Supplier;
 @RestController
 public class TrainingRequestController {
 
-    protected static final String TRAINING_REQUEST_OPEN = "open";
-    private static final String MINIMUM_TRAINING_AMOUNT = "0.00";
-
     private RequestService requestService;
 
     public TrainingRequestController(RequestService requestService) {
@@ -28,7 +26,7 @@ public class TrainingRequestController {
     }
 
     @PostMapping("/trainingrequests")
-    public ResponseEntity createTrainingRequest(@RequestBody CreateTrainingRequest createTrainingRequest) {
+    public ResponseEntity createTrainingRequest(@Valid @RequestBody CreateTrainingRequest createTrainingRequest) {
         Long trainingRequestId = requestService.createTrainingRequest(createTrainingRequest);
         MultiValueMap<String, String> headers = new HttpHeaders();
         headers.put(HttpHeaders.LOCATION, Collections.singletonList("/trainingrequests/" + trainingRequestId));
