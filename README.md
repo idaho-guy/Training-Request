@@ -19,3 +19,5 @@
 [Implement PUT](https://github.com/cbarbosa21/Training-Request/commit/083aac03772a928a6c753434470240832e1bae52)
 
 [Eureka Configuration](https://github.com/cbarbosa21/Training-Request/commit/ef0ccb05267fe6b18cdd0822aace05ac349034b0)
+
+[Implement Integration Test with custom @Sql](https://github.com/cbarbosa21/Training-Request/commit/30a101686aa53cbe2f653cd28dead3af88ba60c6)
