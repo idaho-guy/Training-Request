@@ -21,3 +21,5 @@
 [Eureka Configuration](https://github.com/cbarbosa21/Training-Request/commit/ef0ccb05267fe6b18cdd0822aace05ac349034b0)
 
 [Implement Integration Test with custom @Sql](https://github.com/cbarbosa21/Training-Request/commit/30a101686aa53cbe2f653cd28dead3af88ba60c6)
+
+[Logging](https://github.com/cbarbosa21/Training-Request/commit/3d9c676f4049e4b72bfb96863afb5146a0c31a33)
