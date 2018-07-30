@@ -1,1 +1,9 @@
-INSERT INTO EMPLOYEE_ENTITY VALUES (1, 'cbarbosa@gmail.com', '1', 'Ceasar', 'http.ouch.com', 'Barbosa', 'Chicago', 'Scrub');
+INSERT INTO EMPLOYEE (id, email, employee_number,first_name, last_name, office, title, image_url) VALUES (1, 'cbarbosa@gmail.com', '1', 'Ceasar', 'Barbosa','Chicago', 'Technical Analyst', 'http://ouch.com');
+INSERT INTO EMPLOYEE (id, email, employee_number,first_name, last_name, office, title, image_url) VALUES (2, 'msage@gmail.com', '2', 'Mark', 'Sage','Chicago', 'Technical Consultant', 'http://ouch.com');
+INSERT INTO EMPLOYEE (id, email, employee_number,first_name, last_name, office, title, image_url) VALUES (3, 'rmacready@gmail.com', '3', 'R.J.', 'MacReady','Chicago', 'Technical Analyst', 'http://ouch.com');
+INSERT INTO EMPLOYEE (id, email, employee_number,first_name, last_name, office, title, image_url) VALUES (4, 'tnauls@gmail.com', '4', 'T.K.', 'Nauls','Chicago', 'Technical Analyst', 'http://ouch.com');
+INSERT INTO EMPLOYEE (id, email, employee_number,first_name, last_name, office, title, image_url) VALUES (5, 'dblaire@gmail.com', '5', 'Dr.', 'Blair','Chicago', 'Technical Analyst', 'http://ouch.com');
+INSERT INTO EMPLOYEE (id, email, employee_number,first_name, last_name, office, title, image_url) VALUES (6, 'dpalmer@gmail.com', '6', 'David', 'Palmer','Chicago', 'Technical Analyst', 'http://ouch.com');
+INSERT INTO EMPLOYEE (id, email, employee_number,first_name, last_name, office, title, image_url) VALUES (7, 'vnorris@gmail.com', '7', 'Vince', 'Norris','Chicago', 'Technical Analyst', 'http://ouch.com');
+INSERT INTO EMPLOYEE (id, email, employee_number,first_name, last_name, office, title, image_url) VALUES (8, 'gbennings@gmail.com', '8', 'George', 'Bennings','Chicago', 'Technical Analyst', 'http://ouch.com');
+INSERT INTO EMPLOYEE (id, email, employee_number,first_name, last_name, office, title, image_url) VALUES (9, 'rclark@gmail.com', '9', 'Richard', 'Clark','Chicago', 'Technical Analyst', 'http://ouch.com');
