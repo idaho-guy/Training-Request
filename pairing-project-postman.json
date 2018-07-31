@@ -209,7 +209,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"location\":\"\",\n\t\"description\":\"Spring Boot\",\n\t\"cost\":\"200\",\n\t\"employeeId\":7\n}"
+					"raw": "{\n\t\"location\":\"Chicago\",\n\t\"description\":\"Spring Boot\",\n\t\"cost\":\"200\",\n\t\"employeeId\":7\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8765/training-request-service/trainingrequests",
