@@ -24,3 +24,7 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+scripts/logs/api-gateway.log
+scripts/logs/discovery.log
+scripts/logs/employee.log
+scripts/logs/training-request.log

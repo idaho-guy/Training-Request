@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+mkdir logs
 cd ../discovery
 echo "Discovery server starting"
 gradle bootRun > ../scripts/logs/discovery.log &
