@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "54f86e1d-9653-4dfb-a692-e13832f0fbe0",
+		"name": "Training Request ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Employee By Id Success",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "YieldGoal",
+						"value": "20"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic ZHNhbmNob0Bzb2xzdGljZS5jb206dGVzdDEyMzQ=",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8765/employee-service/employees/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"employee-service",
+						"employees",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employee By Id Not Found",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8765/employee-service/employees/1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"employee-service",
+						"employees",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Request Success",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"approver\": \"Professor X\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8765/training-request-service/trainingrequests/10000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"training-request-service",
+						"trainingrequests",
+						"10000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Request Failure",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"approver\": \"Professor X\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8765/training-request-service/trainingrequests/1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"training-request-service",
+						"trainingrequests",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Open Training Requests",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8765/training-request-service/trainingrequests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"training-request-service",
+						"trainingrequests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Training Requests Above Cost",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8765/training-request-service/trainingrequests?cost=250",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"training-request-service",
+						"trainingrequests"
+					],
+					"query": [
+						{
+							"key": "cost",
+							"value": "250"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Training Requests Above Cost No Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8765/training-request-service/trainingrequests?cost=1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"training-request-service",
+						"trainingrequests"
+					],
+					"query": [
+						{
+							"key": "cost",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Training Request Success",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"location\":\"\",\n\t\"description\":\"Spring Boot\",\n\t\"cost\":\"200\",\n\t\"employeeId\":7\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8765/training-request-service/trainingrequests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"training-request-service",
+						"trainingrequests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Training Request Failure",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"location\":\"\",\n\t\"description\":\"Spring Boot\",\n\t\"cost\":\"200\",\n\t\"employeeId\":7\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8765/training-request-service/trainingrequests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"training-request-service",
+						"trainingrequests"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
