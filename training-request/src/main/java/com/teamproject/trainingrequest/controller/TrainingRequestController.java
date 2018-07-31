@@ -4,6 +4,7 @@ import com.teamproject.trainingrequest.model.ApproveTrainingRequest;
 import com.teamproject.trainingrequest.model.CreateTrainingRequest;
 import com.teamproject.trainingrequest.model.TrainingRequest;
 import com.teamproject.trainingrequest.service.RequestService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,9 @@ public class TrainingRequestController {
     }
 
     @PostMapping("/trainingrequests")
-    public ResponseEntity createTrainingRequest(@Valid @RequestBody CreateTrainingRequest createTrainingRequest) {
+    @ApiOperation(value = "Create Training Request", notes = "Endpoint used by employees to request training," +
+            " newly created resource will be found in location header")
+    public ResponseEntity<Void> createTrainingRequest(@Valid @RequestBody CreateTrainingRequest createTrainingRequest) {
         Long trainingRequestId = requestService.createTrainingRequest(createTrainingRequest);
         MultiValueMap<String, String> headers = new HttpHeaders();
         headers.put(HttpHeaders.LOCATION, Collections.singletonList("/trainingrequests/" + trainingRequestId));
@@ -34,6 +37,9 @@ public class TrainingRequestController {
     }
 
     @GetMapping("/trainingrequests")
+    @ApiOperation(value = "Get Training Requests", notes = "If no query paramenters provided," +
+            " then all unapproved training requests will be returned;" +
+            " If 'cost' parameter is passed in, all training requests above amount regardless of approval status will be returned.")
     public ResponseEntity<List<TrainingRequest>> getTrainingRequests(@RequestParam(value = "cost", required = false) BigDecimal cost) {
 
         if(cost != null){
@@ -54,7 +60,8 @@ public class TrainingRequestController {
     }
 
     @PutMapping("/trainingrequests/{id}")
-    public ResponseEntity approveTrainingRequest(@PathVariable(name = "id") Long id, @Valid @RequestBody ApproveTrainingRequest approveTrainingRequest) {
+    @ApiOperation(value = "Approve Training Request", notes = "Endpoint used by staff that approve training")
+    public ResponseEntity<Void> approveTrainingRequest(@PathVariable(name = "id") Long id, @Valid @RequestBody ApproveTrainingRequest approveTrainingRequest) {
         requestService.approveTrainingRequest(id, approveTrainingRequest.getApprover());
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
