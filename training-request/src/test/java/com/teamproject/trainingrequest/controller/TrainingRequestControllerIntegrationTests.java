@@ -2,7 +2,9 @@ package com.teamproject.trainingrequest.controller;
 
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import com.teamproject.trainingrequest.entity.TrainingRequestEntity;
 import com.teamproject.trainingrequest.model.TrainingRequest;
+import com.teamproject.trainingrequest.repository.TrainingRequestRepository;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,7 +26,7 @@ import java.util.List;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static java.util.stream.Collectors.joining;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -45,22 +47,20 @@ public class TrainingRequestControllerIntegrationTests {
 	TestRestTemplate rest;
 	private String allOpenRequestsJson;
 
+	@Autowired
+	TrainingRequestRepository trainingRequestRepository;
+	private HttpHeaders httpHeaders;
+
 	@Before
 	public void setUp() throws Exception {
 		allOpenRequestsJson = getJSON("all-open-requests.json");
 		System.out.println(allOpenRequestsJson);
-		String allOpenRequests;
+		httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 	}
 
 	@Test
 	public void getOpenTrainingRequests() {
-//		ResponseDefinitionBuilder defBuilder = new ResponseDefinitionBuilder();
-//		defBuilder.withBody(allOpenRequestsJson);
-//		employeeService.stubFor(get(urlEqualTo("/employee-service/employees")).willReturn(defBuilder));
-
-
-
-
 		List<TrainingRequest> requests = rest.getForObject("/trainingrequests", List.class);
 		assertEquals(2, requests.size());
 
@@ -76,24 +76,51 @@ public class TrainingRequestControllerIntegrationTests {
 	}
 
 	@Test
-	public void createNewRequest() throws Exception {
+	public void testPostRequest() throws Exception {
 
-		ResponseDefinitionBuilder defBuilder = new ResponseDefinitionBuilder();
-		defBuilder.withBody(getJSON("employee-7.json")).withHeader("Content-Type","application/json");
-		employeeService.stubFor(get(urlEqualTo("/employees/7")).willReturn(defBuilder));
+		setUpPostExpectations();
 
-		String newRequest = getJSON("request-post.json");
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<String> entity = new HttpEntity<String>(getJSON("request-post.json"), httpHeaders);
 
-		HttpEntity<String> entity = new HttpEntity<String>(newRequest, headers);
-
-		ResponseEntity<TrainingRequest> responseEntityResponseEntity =
+		ResponseEntity<TrainingRequest> entityForPost =
 				rest.postForEntity(new URI("/trainingrequests"), entity, TrainingRequest.class);
-		assertEquals(HttpStatus.CREATED,responseEntityResponseEntity.getStatusCode());
-		assertEquals("/trainingrequests/1",responseEntityResponseEntity.getHeaders().get("location").get(0));
 
+
+		assertEquals(HttpStatus.CREATED, entityForPost.getStatusCode());
+		assertEquals("/trainingrequests/1", entityForPost.getHeaders().get("location").get(0));
+		TrainingRequestEntity trEntity = trainingRequestRepository.findById(1L).get();
+		assertEquals("Chicago", trEntity.getLocation());
+		assertEquals("Spring Boot", trEntity.getDescription());
+		assertEquals("200.00", trEntity.getCost().toString());
+		assertEquals("Vince", trEntity.getRequestedByFirstName());
+		assertEquals("Norris", trEntity.getRequestedByLastName());
+		assertEquals(new Long(7), trEntity.getEmployeeId());
+		assertNull(trEntity.getApprovedDate());
+		assertNull(trEntity.getApprovedBy());
+
+	}
+
+	@Test
+	public void testPutRequest() throws Exception {
+		TrainingRequestEntity trEntity = trainingRequestRepository.findById(10000L).get();
+		assertNull(trEntity.getApprovedDate());
+		assertNull(trEntity.getApprovedBy());
+
+		HttpEntity entityForPut = new HttpEntity<String>(getJSON("request-put.json"), httpHeaders);
+
+		rest.put(new URI("/trainingrequests/10000"),entityForPut);
+		trEntity = trainingRequestRepository.findById(10000L).get();
+
+		assertEquals("cbarbosa", trEntity.getApprovedBy());
+		assertNotNull(trEntity.getApprovedDate());
+
+	}
+
+	private void setUpPostExpectations() throws Exception {
+		ResponseDefinitionBuilder postBuilder = new ResponseDefinitionBuilder();
+		postBuilder.withBody(getJSON("employee-7.json")).withHeader("Content-Type","application/json");
+		employeeService.stubFor(get(urlEqualTo("/employees/7")).willReturn(postBuilder));
 	}
 
 	private String getJSON(String file) throws Exception {
