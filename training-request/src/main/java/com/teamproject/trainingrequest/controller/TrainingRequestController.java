@@ -54,7 +54,7 @@ public class TrainingRequestController {
     }
 
     @PutMapping("/trainingrequests/{id}")
-    public ResponseEntity approveTrainingRequest(@PathVariable(name = "id") Long id, @RequestBody ApproveTrainingRequest approveTrainingRequest) {
+    public ResponseEntity approveTrainingRequest(@PathVariable(name = "id") Long id, @Valid @RequestBody ApproveTrainingRequest approveTrainingRequest) {
         requestService.approveTrainingRequest(id, approveTrainingRequest.getApprover());
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
