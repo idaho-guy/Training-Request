@@ -26,6 +26,12 @@ public class TrainingRequestController {
         this.requestService = requestService;
     }
 
+    @GetMapping("/trainingrequests/{id}")
+    @ApiOperation(value = "Get Training Request by id")
+    public TrainingRequest getTrainingRequest(@PathVariable(name = "id") Long id) {
+        return requestService.getTrainingRequest(id);
+    }
+
     @PostMapping("/trainingrequests")
     @ApiOperation(value = "Create Training Request", notes = "Endpoint used by employees to request training," +
             " newly created resource will be found in location header")

@@ -7,10 +7,13 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface RequestService {
-    Long createTrainingRequest(CreateTrainingRequest createTrainingRequest);
-    List<TrainingRequest> getOpenTrainingRequests();
+  Long createTrainingRequest(CreateTrainingRequest createTrainingRequest);
 
-    List<TrainingRequest> getTrainingRequestByCost(BigDecimal amount);
+  List<TrainingRequest> getOpenTrainingRequests();
 
-    void approveTrainingRequest(Long trainingRequestId, String approver);
+  List<TrainingRequest> getTrainingRequestByCost(BigDecimal amount);
+
+  void approveTrainingRequest(Long trainingRequestId, String approver);
+
+  TrainingRequest getTrainingRequest(Long id);
 }

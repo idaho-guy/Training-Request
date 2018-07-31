@@ -70,6 +70,11 @@ public class TrainingRequestService implements RequestService {
         repo.save(e);
     }
 
+    @Override
+    public TrainingRequest getTrainingRequest(Long id) {
+        return repo.findById(id).map(entity -> convertToTrainingRequest(entity)).orElseThrow(() -> new TrainingRequestNotFoundException(id));
+    }
+
     private TrainingRequest convertToTrainingRequest(TrainingRequestEntity entity) {
         return modelMapper.map(entity,TrainingRequest.class);
 
