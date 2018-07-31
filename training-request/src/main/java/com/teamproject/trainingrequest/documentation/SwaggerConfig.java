@@ -15,7 +15,7 @@ import java.util.HashSet;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    public final HashSet<String> PRODUCES_AND_CONSUME = new HashSet<>(Arrays.asList("application/json", "application/xml"));
+    public final HashSet<String> PRODUCES_AND_CONSUME = new HashSet<>(Arrays.asList("application/json"));
 
     @Bean
     public Docket api() {
