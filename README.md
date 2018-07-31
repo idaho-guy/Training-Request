@@ -4,6 +4,7 @@
 
 * [Swagger UI](http://localhost:8080/swagger-ui.html)
 * [Swagger Api Docs](http://localhost:8080/v2/api-docs)
+* [Swagger Model Positioning & Documentatiion](https://github.com/cbarbosa21/Training-Request/commit/e9997e77d5e578434e00272ffb7cdf84d93f9909)
 
 [H2-Console](http://localhost:8080/h2-console)
 
