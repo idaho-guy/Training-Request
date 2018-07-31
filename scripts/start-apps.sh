@@ -2,7 +2,7 @@
 cd ../discovery
 echo "Discovery server starting"
 gradle bootRun > ../scripts/logs/discovery.log &
-sleep 5
+sleep 10
 cd ../employee
 echo "Employee service starting"
 gradle bootRun > ../scripts/logs/employee.log &
